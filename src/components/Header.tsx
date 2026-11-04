@@ -1,75 +1,86 @@
-import React, { useState, useEffect } from 'react';
-import { PERSONAL_INFO, PROJECTS } from '../data/portfolioData';
-import { ArrowUpRight, Check, Copy, X } from 'lucide-react';
-import { ProjectItem } from '../types/portfolio';
+import React, { useState, useEffect } from "react";
+import { X, ArrowUpRight, Check, Copy } from "lucide-react";
+import { profile, projects, Project } from "../data/portfolioData";
 
 interface HeaderProps {
-  onSelectProject: (project: ProjectItem) => void;
+  onSelectProject: (project: Project) => void;
+  onGoHome?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
+export const Header: React.FC<HeaderProps> = ({ onSelectProject, onGoHome }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isEmailCopied, setIsEmailCopied] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 20);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent background scroll when menu is open
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    navigator.clipboard.writeText(profile.email);
+    setIsEmailCopied(true);
+    setTimeout(() => setIsEmailCopied(false), 2000);
   };
 
-  const scrollTo = (id: string) => {
+  const handleNavClick = (sectionId: string) => {
     setIsMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (onGoHome) {
+      onGoHome();
     }
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 50);
+  };
+
+  const handleBrandClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onGoHome) {
+      onGoHome();
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-          scrolled
-            ? 'bg-white/90 backdrop-blur-md border-b border-black/5 py-4'
-            : 'bg-transparent py-6 md:py-8'
+          isScrolled
+            ? "bg-white/90 backdrop-blur-md border-b border-black/5 py-4 shadow-xs"
+            : "bg-transparent py-6 md:py-8"
         }`}
       >
         <div className="max-w-[1360px] mx-auto px-6 md:px-12 lg:px-16 flex items-center justify-between">
-          {/* Logo */}
           <a
             href="#"
-            className="text-xl md:text-2xl font-bold tracking-tight text-black hover:opacity-70 transition-opacity uppercase"
+            onClick={handleBrandClick}
+            className="text-xl md:text-2xl font-bold tracking-tight text-black hover:opacity-70 transition-opacity uppercase font-heading"
           >
-            {PERSONAL_INFO.firstName}
+            {profile.firstName}
           </a>
 
-          {/* Minimal 6-dots button matching Yuya */}
           <button
             type="button"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="group relative p-2.5 rounded-lg hover:bg-black/5 transition-all focus:outline-none cursor-pointer"
-            aria-label={isMenuOpen ? 'Close Menu' : 'Open Menu'}
+            aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
           >
             <div className="w-5 h-5 flex flex-col justify-center items-center">
               {isMenuOpen ? (
@@ -89,13 +100,12 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
         </div>
       </header>
 
-      {/* Menu Overlay */}
+      {/* Fullscreen Overlay Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 bg-black text-white flex flex-col justify-between p-6 md:p-12 lg:px-16 overflow-y-auto animate-in fade-in duration-200">
-          {/* Top Bar inside Menu */}
           <div className="max-w-[1360px] w-full mx-auto flex items-center justify-between pb-8 border-b border-white/10">
-            <span className="text-xl md:text-2xl font-bold tracking-tight uppercase">
-              {PERSONAL_INFO.firstName}
+            <span className="text-xl md:text-2xl font-bold tracking-tight uppercase font-heading">
+              {profile.firstName}
             </span>
             <button
               type="button"
@@ -107,16 +117,16 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
             </button>
           </div>
 
-          {/* Menu Content */}
           <div className="max-w-[1360px] w-full mx-auto py-10 md:py-14 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Primary Navigation */}
             <div className="lg:col-span-6 space-y-6">
-              <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">Navigation</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+                Navigation
+              </p>
               <ul className="space-y-4">
                 <li>
                   <button
                     type="button"
-                    onClick={() => scrollTo('work')}
+                    onClick={() => handleNavClick("work")}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold hover:text-neutral-300 transition-colors block text-left cursor-pointer"
                   >
                     work.
@@ -125,7 +135,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
                 <li>
                   <button
                     type="button"
-                    onClick={() => scrollTo('about')}
+                    onClick={() => handleNavClick("about")}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold hover:text-neutral-300 transition-colors block text-left cursor-pointer"
                   >
                     about.
@@ -134,7 +144,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
                 <li>
                   <button
                     type="button"
-                    onClick={() => scrollTo('contact')}
+                    onClick={() => handleNavClick("contact")}
                     className="text-4xl md:text-5xl lg:text-6xl font-bold hover:text-neutral-300 transition-colors block text-left cursor-pointer"
                   >
                     contact.
@@ -143,48 +153,50 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
               </ul>
             </div>
 
-            {/* Projects List */}
             <div className="lg:col-span-6 space-y-6">
-              <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">Selected Works</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+                Selected Works
+              </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {PROJECTS.map((project) => (
+                {projects.map((item) => (
                   <div
-                    key={project.id}
+                    key={item.id}
                     onClick={() => {
                       setIsMenuOpen(false);
-                      onSelectProject(project);
+                      onSelectProject(item);
                     }}
                     className="group cursor-pointer p-3.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-neutral-600 transition-all"
                   >
                     <div className="aspect-[4/3] rounded overflow-hidden mb-3 bg-neutral-800">
                       <img
-                        src={project.image}
-                        alt={project.title}
+                        src={item.image}
+                        alt={item.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <h4 className="font-semibold text-white group-hover:text-neutral-300 flex items-center justify-between text-sm">
-                      <span>{project.shortTitle}</span>
+                      <span>{item.shortTitle}</span>
                       <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </h4>
-                    <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1">{project.category}</p>
+                    <p className="text-xs text-neutral-400 mt-0.5 line-clamp-1">
+                      {item.category}
+                    </p>
                   </div>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Bottom Contact inside Menu */}
           <div className="max-w-[1360px] w-full mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-sm text-neutral-400">Direct Email:</span>
-              <span className="text-sm font-medium text-white">{PERSONAL_INFO.email}</span>
+              <span className="text-sm font-medium text-white">{profile.email}</span>
               <button
                 type="button"
                 onClick={handleCopyEmail}
                 className="px-3 py-1 text-xs bg-white/10 hover:bg-white/20 rounded-md transition-colors flex items-center gap-1.5 cursor-pointer"
               >
-                {copied ? (
+                {isEmailCopied ? (
                   <>
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
                     <span className="text-emerald-400">Copied!</span>
@@ -200,7 +212,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
 
             <div className="flex items-center gap-6">
               <a
-                href={PERSONAL_INFO.linkedin}
+                href={profile.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-neutral-300 hover:text-white flex items-center gap-1 transition-colors"
@@ -208,7 +220,7 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject }) => {
                 LinkedIn <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
               <a
-                href={PERSONAL_INFO.behance}
+                href={profile.behance}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-neutral-300 hover:text-white flex items-center gap-1 transition-colors"

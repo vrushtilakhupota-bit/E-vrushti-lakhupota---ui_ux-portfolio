@@ -1,110 +1,142 @@
-import { ProjectItem } from '../types/portfolio';
+export interface Project {
+  id: string;
+  title: string;
+  shortTitle: string;
+  category: string;
+  description: string;
+  image: string;
+  behanceUrl: string;
+  pdfUrl: string;
+  role: string;
+  duration: string;
+  process: string;
+  highlights: string[];
+  tools?: string[];
+  clientOrContext?: string;
+}
 
-export const PERSONAL_INFO = {
-  name: 'Vrushti Lakhupota',
-  firstName: 'VRUSHTI',
-  lastName: 'LAKHUPOTA',
-  role: 'UI/UX Designer',
-  education: 'M.Design student in UI/UX',
-  email: 'vrushtilakhupota@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/vrushti-lakhupota-a86768389',
-  behance: 'https://www.behance.net/gallery/250526161/Women-Safety-UX-Case-Study',
-  shortIntro:
-    'Code taught me how things work. Design taught me how they feel. Now, as an M.Design student in UI/UX, I make the two meet.',
-  photoUrl: '/assets/aistudio/WhatsApp_Image_2026-10-11_at_12.54.12_AM_00acee8d.jpeg',
-  aboutHeadline:
-    'I collaborate with curious minds and forward-thinking teams, translating complex user workflows into clear, human, and intuitive digital experiences.',
-  aboutStory:
-    "Code taught me how things work. Design taught me how they feel. Now, as an M.Design student in UI/UX, I make the two meet. With a grounding in engineering logic and an obsession with behavioral psychology, I design digital products where functional efficiency and emotional clarity live in harmony.",
+export interface Profile {
+  name: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  education: string;
+  email: string;
+  linkedin: string;
+  behance: string;
+  shortIntro: string;
+  photoUrl: string;
+  aboutHeadline: string;
+  aboutStory: string;
+  skills: string[];
+}
+
+export const profile: Profile = {
+  name: "Vrushti Lakhupota",
+  firstName: "VRUSHTI",
+  lastName: "LAKHUPOTA",
+  role: "UI/UX Designer",
+  education: "M.Design student in UI/UX",
+  email: "vrushtilakhupota@gmail.com",
+  linkedin: "https://www.linkedin.com/in/vrushti-lakhupota-a86768389",
+  behance: "https://www.behance.net/gallery/250526161/Women-Safety-UX-Case-Study",
+  shortIntro: "Code taught me how things work. Design taught me how they feel. Now, as an M.Design student in UI/UX, I make the two meet.",
+  photoUrl: "/assets/aistudio/WhatsApp_Image_2026-10-11_at_12.54.12_AM_00acee8d.jpeg",
+  aboutHeadline: "I collaborate with curious minds and forward-thinking teams, translating complex user workflows into clear, human, and intuitive digital experiences.",
+  aboutStory: "Code taught me how things work. Design taught me how they feel. Now, as an M.Design student in UI/UX, I make the two meet. With a grounding in engineering logic and an obsession with behavioral psychology, I design digital products where functional efficiency and emotional clarity live in harmony.",
   skills: [
-    'User Experience (UX) Design',
-    'User Interface (UI) Design',
-    'User Research & Synthesis',
-    'Information Architecture',
-    'Wireframing & Prototyping',
-    'Design Systems & Usability Testing',
+    "User Experience (UX) Design",
+    "User Interface (UI) Design",
+    "User Research & Synthesis",
+    "Information Architecture",
+    "Wireframing & Prototyping",
+    "Design Systems & Usability Testing",
   ],
 };
 
-export const PROJECTS: ProjectItem[] = [
+export const projects: Project[] = [
   {
-    id: 'safe-her',
-    title: 'Women Safety UX Case Study',
-    shortTitle: 'Safe Her',
-    category: 'UX Case Study · Mobile App Design',
-    description:
-      'Designing a rapid, discreet, and reliable emergency response companion. Safe Her empowers women in critical situations by streamlining panic triggers, trusted circle notifications, and location sharing with zero friction.',
-    image: '/assets/aistudio/Screenshot_2026-10-08_115244_7f21625f.png',
-    behanceUrl: 'https://www.behance.net/gallery/250526161/Women-Safety-UX-Case-Study',
-    pdfUrl: '/assets/aistudio/Improved_Design_Project_ad386b56.pdf',
-    role: 'UX Researcher & Product Designer',
-    duration: '6 Weeks',
-    process: 'Empathize · User Interviews · Wireframing · High-Fidelity UI',
+    id: "safe-her",
+    title: "Women Safety UX Case Study",
+    shortTitle: "Safe Her",
+    category: "UX Case Study · Mobile App Design",
+    description: "Designing a rapid, discreet, and reliable emergency response companion. Safe Her empowers women in critical situations by streamlining panic triggers, trusted circle notifications, and location sharing with zero friction.",
+    image: "/assets/aistudio/Screenshot_2026-10-08_115244_7f21625f.png",
+    behanceUrl: "https://www.behance.net/gallery/250526161/Women-Safety-UX-Case-Study",
+    pdfUrl: "/assets/aistudio/Improved_Design_Project_ad386b56.pdf",
+    role: "UX Researcher & Product Designer",
+    duration: "6 Weeks",
+    process: "Empathize · User Interviews · Wireframing · High-Fidelity UI",
+    clientOrContext: "Personal Research & Social Impact Design",
+    tools: ["Figma", "User Interviews", "Information Architecture", "Interactive Prototyping"],
     highlights: [
-      'Rapid-action emergency trigger requiring minimal physical effort',
-      'Trusted circles contact management with instantaneous status broadcast',
-      'End-to-end encrypted privacy and location controls',
-      'Stress-tested micro-interactions tailored for high-anxiety moments',
+      "Rapid-action emergency trigger requiring minimal physical effort",
+      "Trusted circles contact management with instantaneous status broadcast",
+      "End-to-end encrypted privacy and location controls",
+      "Stress-tested micro-interactions tailored for high-anxiety moments",
     ],
   },
   {
-    id: 'smart-canteen',
-    title: 'Smart Canteen Experience (Indus University)',
-    shortTitle: 'Smart Canteen Solutions',
-    category: 'UX Case Study · Service Design',
-    description:
-      'Designing a seamless digital canteen ecosystem to eliminate rush-hour congestion, payment bottlenecks, and pickup delays for thousands of students and faculty members at Indus University.',
-    image: '/assets/aistudio/Screenshot_2026-10-18_180005_78aa1da3.png',
-    behanceUrl: 'https://www.behance.net/gallery/250523551/Smart-Canteen-Solutions-%28Indus-University%29',
-    pdfUrl: '/assets/aistudio/Digital_Canteen_Solutions_de89c8fd.pdf',
-    role: 'UX Designer',
-    duration: '4 Weeks',
-    process: 'Design Thinking · On-Site Observation · Service Blueprint',
+    id: "smart-canteen",
+    title: "Smart Canteen Experience (Indus University)",
+    shortTitle: "Smart Canteen Solutions",
+    category: "UX Case Study · Service Design",
+    description: "Designing a seamless digital canteen ecosystem to eliminate rush-hour congestion, payment bottlenecks, and pickup delays for thousands of students and faculty members at Indus University.",
+    image: "/assets/aistudio/Screenshot_2026-10-18_180005_78aa1da3.png",
+    behanceUrl: "https://www.behance.net/gallery/250523551/Smart-Canteen-Solutions-%28Indus-University%29",
+    pdfUrl: "/assets/aistudio/Digital_Canteen_Solutions_de89c8fd.pdf",
+    role: "UX Designer",
+    duration: "4 Weeks",
+    process: "Design Thinking · On-Site Observation · Service Blueprint",
+    clientOrContext: "Indus University Campus Innovation",
+    tools: ["Service Blueprinting", "Field Research", "Figma", "Queue Modeling"],
     highlights: [
-      'Live queue estimations and smart token collection workflow',
-      'Integrated meal credit wallet and instant reward redemptions',
-      'Categorized visual food discovery optimizing order turnaround',
-      'Campus-tested usability flow with student and canteen staff feedback',
+      "Live queue estimations and smart token collection workflow",
+      "Integrated meal credit wallet and instant reward redemptions",
+      "Categorized visual food discovery optimizing order turnaround",
+      "Campus-tested usability flow with student and canteen staff feedback",
     ],
   },
   {
-    id: 'blinkit-kids',
-    title: 'Blinkit Redesign for Kids',
-    shortTitle: 'Blinkit for Kids',
-    category: 'UX Research · Gamified UI Design',
-    description:
-      'A child-friendly reimagining of quick-commerce that transforms routine errands into playful, educational adventures. Built with vibrant visual metaphors, healthy eating encouragement, and parental safety checkpoints.',
-    image: '/assets/aistudio/Screenshot_2026-10-08_115418_3c5b7973.png',
-    behanceUrl: 'https://www.behance.net/gallery/250526855/Blinkit-Redesign-for-Kids',
-    pdfUrl: '/assets/aistudio/3-Blinkit_Kids_7023bd8a.pdf',
-    role: 'UX Researcher & UI Designer',
-    duration: 'Case Study',
-    process: 'Child Cognitive Research · Gamification Loops · Visual System',
+    id: "blinkit-kids",
+    title: "Blinkit Redesign for Kids",
+    shortTitle: "Blinkit for Kids",
+    category: "UX Research · Gamified UI Design",
+    description: "A child-friendly reimagining of quick-commerce that transforms routine errands into playful, educational adventures. Built with vibrant visual metaphors, healthy eating encouragement, and parental safety checkpoints.",
+    image: "/assets/aistudio/Screenshot_2026-10-08_115418_3c5b7973.png",
+    behanceUrl: "https://www.behance.net/gallery/250526855/Blinkit-Redesign-for-Kids",
+    pdfUrl: "/assets/aistudio/3-Blinkit_Kids_7023bd8a.pdf",
+    role: "UX Researcher & UI Designer",
+    duration: "Case Study",
+    process: "Child Cognitive Research · Gamification Loops · Visual System",
+    clientOrContext: "Gamified Commerce Exploratory Project",
+    tools: ["Visual Design", "Gamification Mechanics", "Figma", "Cognitive Usability"],
     highlights: [
       'Interactive "Healthy Hero" mascot driving nutritional awareness',
-      'Simplified, iconography-led visual shopping journey',
-      'Robust parental controls and pin-gated checkout verification',
-      'Delightful feedback animations celebrating micro-achievements',
+      "Simplified, iconography-led visual shopping journey",
+      "Robust parental controls and pin-gated checkout verification",
+      "Delightful feedback animations celebrating micro-achievements",
     ],
   },
   {
-    id: 'edible-cups',
-    title: 'Edible Cup Product Design',
-    shortTitle: 'Edible Cups',
-    category: 'Product & Packaging Design · Sustainable UX',
-    description:
-      'Addressing the catastrophic environmental waste of single-use disposable hot beverage cups. Re-engineered as a sturdy, thermal-insulating, leak-proof, and 100% edible cup for tea and coffee stalls and university canteens.',
-    image: '/assets/aistudio/Screenshot_2026-10-20_232553_78cc6ff4.png',
-    behanceUrl: 'https://www.behance.net/gallery/250533413/Edible-Cup-Product-design',
-    pdfUrl: '/assets/aistudio/Edible_Cups_56364adc.pdf',
-    role: 'Product & Packaging Designer',
-    duration: 'Design Project',
-    process: 'Material Feasibility · Ergonomics Study · Sustainable Lifecycle',
+    id: "edible-cups",
+    title: "Edible Cup Product Design",
+    shortTitle: "Edible Cups",
+    category: "Product & Packaging Design · Sustainable UX",
+    description: "Addressing the catastrophic environmental waste of single-use disposable hot beverage cups. Re-engineered as a sturdy, thermal-insulating, leak-proof, and 100% edible cup for tea and coffee stalls and university canteens.",
+    image: "/assets/aistudio/Screenshot_2026-10-20_232553_78cc6ff4.png",
+    behanceUrl: "https://www.behance.net/gallery/250533413/Edible-Cup-Product-design",
+    pdfUrl: "/assets/aistudio/Edible_Cups_56364adc.pdf",
+    role: "Product & Packaging Designer",
+    duration: "Design Project",
+    process: "Material Feasibility · Ergonomics Study · Sustainable Lifecycle",
+    clientOrContext: "Sustainable Product Design Initiative",
+    tools: ["Physical Prototyping", "Ergonomic Testing", "Packaging Design", "Lifecycle Analysis"],
     highlights: [
-      'Ergonomic ribbed sleeve preventing heat transfer to fingertips',
-      'Natural grain and crisp biscuit base compatible with boiling beverages',
-      'Zero-waste circular consumption with biodegradable footprint',
-      'Usability evaluations targeting everyday chai stall habits',
+      "Ergonomic ribbed sleeve preventing heat transfer to fingertips",
+      "Natural grain and crisp biscuit base compatible with boiling beverages",
+      "Zero-waste circular consumption with biodegradable footprint",
+      "Usability evaluations targeting everyday chai stall habits",
     ],
   },
 ];
