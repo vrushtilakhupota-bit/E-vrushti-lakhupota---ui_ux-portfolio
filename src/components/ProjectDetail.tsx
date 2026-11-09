@@ -319,11 +319,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({
         {/* Full-Width Showcase Imagery */}
         <section className="py-10 sm:py-16 md:py-20">
           <div className="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16">
-            <div className="w-full rounded-2xl overflow-hidden bg-neutral-100 border border-neutral-200/90 shadow-md">
+            <div className="w-full rounded-2xl overflow-hidden bg-neutral-100/90 border border-neutral-200/90 shadow-md flex items-center justify-center p-3 sm:p-6 md:p-8">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-auto object-cover object-top"
+                className="max-w-full h-auto object-contain object-center rounded-xl shadow-xs"
               />
             </div>
             <p className="mt-3 text-xs sm:text-sm text-neutral-500 text-center font-medium">

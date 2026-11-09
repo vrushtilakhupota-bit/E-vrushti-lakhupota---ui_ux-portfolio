@@ -167,11 +167,11 @@ export const Header: React.FC<HeaderProps> = ({ onSelectProject, onGoHome }) => 
                     }}
                     className="group cursor-pointer p-3.5 rounded-lg bg-neutral-900/90 border border-neutral-800 hover:border-neutral-600 transition-all"
                   >
-                    <div className="aspect-[4/3] rounded overflow-hidden mb-3 bg-neutral-800">
+                    <div className="aspect-[16/10] rounded overflow-hidden mb-3 bg-neutral-950 flex items-center justify-center p-1.5 border border-neutral-800">
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
                     <h4 className="font-semibold text-white group-hover:text-neutral-300 flex items-center justify-between text-sm">

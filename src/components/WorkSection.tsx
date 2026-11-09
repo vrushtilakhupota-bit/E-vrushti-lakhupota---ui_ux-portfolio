@@ -35,31 +35,52 @@ export const WorkSection: React.FC<WorkSectionProps> = ({
               onClick={() => onSelectProject(project)}
               className="group cursor-pointer block select-none"
             >
-              <div className="relative group cursor-pointer overflow-hidden rounded-lg bg-neutral-100 shadow-sm hover:shadow-xl transition-all duration-300 aspect-[4/3] sm:aspect-[1.18/1]">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end pointer-events-none">
+              {/* Image Container with Consistent Aspect Ratio, Breathing Room, and Balanced Visuals */}
+              <div className="relative group cursor-pointer overflow-hidden rounded-xl bg-neutral-100/90 border border-neutral-200/60 shadow-sm hover:shadow-xl transition-all duration-300 aspect-[16/10] flex items-center justify-center p-3 sm:p-5">
+                {/* Ambient Soft Backdrop ensuring balanced tone without harsh letterboxing */}
+                <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                  <img
+                    src={project.image}
+                    alt=""
+                    aria-hidden="true"
+                    className="w-full h-full object-cover blur-2xl opacity-25 scale-110"
+                  />
+                </div>
+
+                {/* Complete, Uncropped Project Cover Image preserving full aspect ratio */}
+                <div className="relative z-10 w-full h-full flex items-center justify-center">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="max-w-full max-h-full w-auto h-auto object-contain object-center rounded-lg shadow-xs transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+                  />
+                </div>
+
+                {/* Hover Gradient Overlay */}
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl" />
+
+                {/* Hover Content */}
+                <div className="absolute inset-0 z-30 p-6 sm:p-8 flex flex-col justify-end pointer-events-none">
                   <div className="translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]">
                     <span className="inline-block text-xs uppercase tracking-wider text-neutral-300 font-medium mb-1">
                       {project.category}
                     </span>
-                    <h3 className="text-2xl sm:text-3xl md:text-[34px] font-bold text-white tracking-tight leading-tight flex items-center justify-between">
+                    <h3 className="text-2xl sm:text-3xl md:text-[32px] font-bold text-white tracking-tight leading-tight flex items-center justify-between font-heading">
                       <span>{project.shortTitle}</span>
-                      <span className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white ml-2">
+                      <span className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white ml-2 flex-shrink-0">
                         <ArrowUpRight className="w-4 h-4" />
                       </span>
                     </h3>
                   </div>
                 </div>
-                <div className="md:hidden absolute bottom-3 left-3 px-3 py-1 bg-black/75 backdrop-blur-sm text-white text-xs font-semibold rounded-sm">
+
+                {/* Mobile Badge */}
+                <div className="md:hidden absolute bottom-3 left-3 z-30 px-3 py-1 bg-black/75 backdrop-blur-sm text-white text-xs font-semibold rounded-sm">
                   {project.shortTitle}
                 </div>
               </div>
 
+              {/* Mobile Subtitle */}
               <div className="mt-3 flex items-center justify-between text-xs text-neutral-500 md:hidden px-1">
                 <span className="font-medium text-neutral-900">{project.title}</span>
                 <span>Tap to view</span>
