@@ -42,13 +42,6 @@ export default function App() {
   const handleBackToProjects = () => {
     setSelectedProject(null);
     window.history.pushState(null, "", window.location.pathname);
-    // Smoothly scroll back to the work section after navigating back
-    setTimeout(() => {
-      const workEl = document.getElementById("work");
-      if (workEl) {
-        workEl.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 50);
   };
 
   const handleShowAllProjects = () => {
@@ -59,21 +52,13 @@ export default function App() {
     window.open(profile.linkedin, "_blank", "noopener,noreferrer");
   };
 
-  if (selectedProject) {
-    return (
-      <ProjectDetail
-        project={selectedProject}
-        onBack={handleBackToProjects}
-        onSelectProject={handleSelectProject}
-      />
-    );
-  }
-
   return (
     <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white flex flex-col font-sans">
       <Header
         onSelectProject={handleSelectProject}
-        onGoHome={() => setSelectedProject(null)}
+        onGoHome={() => {
+          if (selectedProject) setSelectedProject(null);
+        }}
       />
       <main className="flex-1">
         <Hero />
@@ -84,6 +69,14 @@ export default function App() {
         <AboutSection onShowMoreBio={handleShowMoreBio} />
       </main>
       <Footer />
+
+      {selectedProject && (
+        <ProjectDetail
+          project={selectedProject}
+          onBack={handleBackToProjects}
+          onSelectProject={handleSelectProject}
+        />
+      )}
     </div>
   );
 }
